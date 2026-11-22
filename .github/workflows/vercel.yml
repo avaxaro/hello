@@ -1,0 +1,15 @@
+name: Deploy to Vercel
+on:
+  workflow_dispatch:
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    env:
+      VERCEL_ORG_ID: ${{ secrets.VERCEL_ORG_ID }}
+      VERCEL_PROJECT_ID: ${{ secrets.VERCEL_PROJECT_ID }}
+    steps:
+      - uses: actions/checkout@v4
+      - run: npm i -g vercel
+      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - run: sed -i "s|</h1>|</h1><p>:::: Deployed by GitHub Actions run #${{ github.run_number }} ::::</p>|" index.html
+      - run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
