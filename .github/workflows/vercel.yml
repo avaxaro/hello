@@ -14,7 +14,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
       - run: npm i -g vercel
-      - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
+      - run: vercel pull --yes --environment=$VERCEL_ENV --token=${{ secrets.VERCEL_TOKEN }}
       - run: |
           sed -i "s|</h1>|</h1><p>:::: Deployed by GitHub Actions run #${{ github.run_number }} ::::</p>|" index.html
       - run: |
