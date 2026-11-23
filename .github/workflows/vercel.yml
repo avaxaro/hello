@@ -16,4 +16,9 @@ jobs:
       - run: vercel pull --yes --environment=production --token=${{ secrets.VERCEL_TOKEN }}
       - run: |
           sed -i "s|</h1>|</h1><p>:::: Deployed by GitHub Actions run #${{ github.run_number }} ::::</p>|" index.html
-      - run: vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+      - run: |
+          if [ "${{ github.event_name }}" = "push" ] && [ "${{ github.ref }}" = "refs/heads/main" ]; then
+            vercel deploy --prod --token=${{ secrets.VERCEL_TOKEN }}
+          else
+            vercel deploy --token=${{ secrets.VERCEL_TOKEN }}
+          fi
