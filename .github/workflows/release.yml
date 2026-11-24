@@ -1,0 +1,10 @@
+name: Release
+on:
+  release:
+    types: [published]
+jobs:
+  announce:
+    runs-on: ubuntu-latest
+    steps:
+      - run: echo "Released ${{ github.event.release.tag_name }}"
+
