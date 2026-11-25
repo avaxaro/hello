@@ -1,4 +1,10 @@
 {
- "git": { "deploymentEnabled": false },
- "crons": [{ "path": "/api/tick", "schedule": "0 8 * * *" }]
+"git": { "deploymentEnabled": false },
+"schedules": {
+  "tick": {
+    "schedule": "0 8 * * *",
+    "path": "/api/tick",
+    "requestMethod": "GET"
+  }
+}
 }
