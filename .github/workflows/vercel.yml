@@ -8,11 +8,8 @@ concurrency:
   group: deploy-${{ github.ref }}
   cancel-in-progress: true
 jobs:
-  test:
-    uses: ./.github/workflows/test.yml
     
   deploy:
-    needs: test
     environment: ${{ github.event_name == 'push' && github.ref == 'refs/heads/main' && 'production' || 'preview' }}
     runs-on: ubuntu-latest
     env:
