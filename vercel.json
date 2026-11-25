@@ -1,1 +1,4 @@
-{ "git": { "deploymentEnabled": false } }
+{
+ "git": { "deploymentEnabled": false },
+ "crons": [{ "path": "/api/tick", "schedule": "0 8 * * *" }]
+}
